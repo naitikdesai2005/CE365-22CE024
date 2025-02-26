@@ -10,6 +10,10 @@ int main()
     char str[20];
    printf("\nEnter string: ");
    gets(str);
+   if (strlen(str) == 0){
+        printf("Invalid string\n");
+        continue;
+    }
    int verify=0;
    //printf("%d", strlen(str));
    int i;

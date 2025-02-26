@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 
-int l = 0, lc = 0, uc = 0, ss = 0, d = 0, ec = 0; // Declare all variables
+int l = 0, lc = 0, uc = 0, ss = 0, d = 0, ec = 0;
 %}
 
 %option noyywrap
@@ -10,16 +10,15 @@ int l = 0, lc = 0, uc = 0, ss = 0, d = 0, ec = 0; // Declare all variables
 [0-9]    { d++; l++; } 
 [a-z]    { lc++; l++; } 
 [A-Z]    { uc++; l++; } 
-[@#]     { ss++; l++; } 
-\n       { 
+[@#-;,*_]	{ ss++; l++; } 
+\n	{ 
             if(d > 0 && lc > 0 && uc > 0 && ss > 0 && l >= 9 && l <= 15 && ec == 0) 
                 printf("Valid\n"); 
             else 
                 printf("Invalid\n"); 
-            // Reset counters for next input
             l = lc = uc = ss = d = ec = 0;
         }
-.        { ec++; printf("Invalid\n"); }  // Fix incorrect syntax
+.	{ ec++; printf("Invalid\n"); }
 
 <<EOF>>  { yyterminate(); }
 %%

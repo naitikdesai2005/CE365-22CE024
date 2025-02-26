@@ -1,21 +1,19 @@
 %option noyywrap
 %{
-#include<stdio.h>
-int w=0,l=0,c=0;
+    #include<stdio.h>
+    int l=0,c=0,w=0;
 %}
 %%
 [\n] {l++;}
-[\t] {c+=yyleng;}
-[^ \t\n]+ {w++; c+=yyleng ;}
-. ;
+[ \t] {c+=yyleng;}
+[^\t\n ]+ {w++; c+=yyleng;}
 <<EOF>> {yyterminate();}
 %%
 int main()
 {
-printf("Enter String : ");
-yylex();
-printf("No. of Characters : %d",c);
-printf("No. of words : %d",w);
-printf("No. of lines : %d",l);
-return 0;
+  printf("Enter String: ");
+  yylex();
+  printf("Total lines: %d \n Total Characters: %d \n Total words: %d",l,c,w);
+
+  return 0;
 }
